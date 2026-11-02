@@ -1,0 +1,13 @@
+{
+  // Site estático da Banda APK, publicado como Worker com arquivos estáticos
+  "name": "bandaapk",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./public",
+    "not_found_handling": "404-page"
+  },
+  "routes": [
+    { "pattern": "bandaapk.com.br", "custom_domain": true },
+    { "pattern": "www.bandaapk.com.br", "custom_domain": true }
+  ]
+}

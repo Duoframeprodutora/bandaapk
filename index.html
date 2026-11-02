@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Banda APK: banda de apoio de festivais de canto e shows para casamentos, formaturas e eventos no RS, SC e PR.">
+<title>Banda APK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Figtree:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: palco à noite. Hero tipo cartaz de festival, depois blocos curtos em coluna, com uma "ficha de inscrição" como detalhe da banda. */
+:root{
+  --curtain:#2a0a12;      /* fundo: cortina de palco */
+  --curtain-2:#3a1019;    /* superfície */
+  --line:#5a2330;         /* divisórias */
+  --paper:#f6ece8;        /* texto principal */
+  --muted:#c9aeb2;        /* texto secundário */
+  --brass:#e2b04a;        /* destaque: luz de refletor / metais */
+  --ink:#1a0609;          /* texto sobre o destaque */
+  --display:"Anton","Impact","Arial Narrow",sans-serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--curtain);color:var(--paper);font-family:var(--body);font-size:17px;line-height:1.6}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--brass);outline-offset:3px;border-radius:4px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--brass)}
+h1,h2{font-family:var(--display);font-weight:400;text-transform:uppercase;line-height:.95;letter-spacing:.01em;text-wrap:balance;margin:0}
+h2{font-size:clamp(34px,6vw,56px)}
+p{margin:0}
+
+/* topo */
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:20px}
+.logo{font-family:var(--display);font-size:28px;letter-spacing:.04em;text-decoration:none}
+.logo span{color:var(--brass)}
+.top nav{display:flex;gap:18px;flex-wrap:wrap;font-size:15px}
+.top nav a{text-decoration:none;color:var(--muted)}
+.top nav a:hover{color:var(--paper)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero::before{content:"";position:absolute;inset:-20% 10% auto auto;width:70vw;max-width:780px;aspect-ratio:1;background:radial-gradient(closest-side,rgba(226,176,74,.30),rgba(226,176,74,0));pointer-events:none;animation:spot 9s ease-in-out infinite alternate}
+@keyframes spot{to{transform:translateX(-12vw)}}
+@media (prefers-reduced-motion:reduce){.hero::before{animation:none}}
+.hero .wrap{position:relative;padding-block:56px 72px;display:grid;gap:28px}
+.hero h1{font-size:clamp(64px,15vw,184px)}
+.hero h1 em{font-style:normal;color:var(--brass);display:block}
+.hero .lead{max-width:56ch;font-size:clamp(18px,2.2vw,21px);color:var(--muted)}
+.hero .lead strong{color:var(--paper);font-weight:500}
+.ctas{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 24px;border-radius:999px;font-weight:700;font-size:17px;text-decoration:none;border:2px solid var(--brass);transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn.primary{background:var(--brass);color:var(--ink)}
+.btn.ghost{color:var(--paper)}
+.states{display:flex;gap:10px;flex-wrap:wrap;font-family:var(--mono);font-size:13px;color:var(--muted)}
+.states span{border:1px solid var(--line);padding:4px 10px;border-radius:4px}
+
+section{padding-block:72px;border-bottom:1px solid var(--line)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.split>*{min-width:0}
+@media (max-width:760px){.split{grid-template-columns:1fr;gap:32px}}
+.stack{display:grid;gap:18px}
+.stack p{color:var(--muted);max-width:60ch}
+
+/* ficha */
+.ficha{background:var(--paper);color:var(--ink);border-radius:6px;padding:24px;transform:rotate(-1.2deg);box-shadow:0 18px 40px rgba(0,0,0,.4);font-size:15px}
+.ficha header{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--ink);padding-bottom:10px;margin-bottom:12px;gap:12px}
+.ficha header b{font-family:var(--display);font-weight:400;font-size:24px;text-transform:uppercase}
+.ficha header small{font-family:var(--mono);font-size:11px}
+.row{display:grid;grid-template-columns:110px 1fr;gap:12px;padding-block:8px;border-bottom:1px dashed #b89a9e}
+.row:last-child{border-bottom:0}
+.row dt{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:3px}
+.row dd{margin:0;font-weight:500;min-width:0;overflow-wrap:anywhere}
+.tom{font-family:var(--mono);background:var(--ink);color:var(--brass);padding:2px 8px;border-radius:4px}
+.ficha .note{margin-top:12px;font-size:13px}
+
+/* passos */
+.steps{list-style:none;margin:40px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;counter-reset:s}
+.steps li{counter-increment:s;display:grid;gap:8px;align-content:start;min-width:0}
+.steps li::before{content:counter(s);font-family:var(--display);font-size:56px;line-height:1;color:var(--brass)}
+.steps b{font-size:18px}
+.steps p{color:var(--muted);font-size:15px}
+@media (max-width:860px){.steps{grid-template-columns:1fr 1fr}}
+@media (max-width:460px){.steps{grid-template-columns:1fr}}
+
+.events{list-style:none;margin:32px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:12px}
+.events li{font-family:var(--display);text-transform:uppercase;font-size:clamp(22px,3.4vw,34px);line-height:1;padding:14px 20px;border:1px solid var(--line);border-radius:6px;background:var(--curtain-2)}
+.events li:nth-child(odd){color:var(--brass)}
+
+/* para quem */
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:36px}
+@media (max-width:760px){.cards{grid-template-columns:1fr}}
+.card{background:var(--curtain-2);border:1px solid var(--line);border-radius:8px;padding:28px;display:grid;gap:14px;align-content:start}
+.card h3{margin:0;font-size:22px}
+.card ul{margin:0;padding-left:20px;color:var(--muted);display:grid;gap:6px}
+
+/* fotos */
+.photos{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px;margin-top:36px}
+.ph{aspect-ratio:4/5;max-width:100%;border:1px dashed var(--line);border-radius:6px;display:grid;place-items:center;text-align:center;padding:12px;color:var(--muted);font-family:var(--mono);font-size:12px;background:repeating-linear-gradient(135deg,var(--curtain-2) 0 12px,var(--curtain) 12px 24px)}
+.ph.big{aspect-ratio:auto;grid-row:span 1}
+@media (max-width:600px){.photos{grid-template-columns:1fr 1fr}.ph.big{grid-column:1/-1;aspect-ratio:16/10}}
+
+/* contato */
+.contact{display:grid;gap:12px}
+.contact .line{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:14px;border-bottom:1px solid var(--line)}
+.contact .line span:first-child{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);padding-top:4px}
+.contact .line span:last-child{font-weight:500;user-select:all}
+
+footer{padding-block:32px;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<header class="wrap top">
+  <a class="logo" href="#">BANDA <span>APK</span></a>
+  <nav aria-label="Principal">
+    <a href="#banda">A banda</a>
+    <a href="#shows">Shows</a>
+    <a href="#como">Festivais</a>
+    <a href="#contato">Contato</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Festivais de canto · Shows · Eventos</p>
+    <h1>Você canta.<em>A gente segura o palco.</em></h1>
+    <p class="lead"><strong>A Banda APK é banda de apoio dos principais festivais de canto do Sul</strong>, acompanhando ao vivo cada candidato no tom certo. E também sobe ao palco com show próprio em casamentos, formaturas, eventos corporativos e festas.</p>
+    <div class="ctas">
+      <a class="btn primary" href="#contato">Contratar a banda</a>
+      <a class="btn ghost" href="https://claude.ai/artifact/NPg58YBPjRwNrcME2pKa8D">Enviar minha música</a>
+    </div>
+    <div class="states" aria-label="Onde tocamos"><span>RS</span><span>SC</span><span>PR</span></div>
+  </div>
+</div>
+
+<main>
+  <section id="banda">
+    <div class="wrap split">
+      <div class="stack">
+        <p class="eyebrow">A banda</p>
+        <h2>Uma banda inteira para cada candidato</h2>
+        <p>Festival de canto é longo: o dia começa cedo com a passagem dos candidatos e vai até a final. A APK passa cada música no ensaio, ajusta tom e andamento, e entra no palco junto com quem está cantando.</p>
+        <p>Pra isso dar certo, a gente pede uma coisa só: que cada candidato mande <strong>o link da versão certa</strong> e o tom em que vai cantar. Uma música como "Evidências" tem mais de cem versões gravadas. Com a ficha certa, ninguém é pego de surpresa no palco.</p>
+      </div>
+      <dl class="ficha" aria-label="Exemplo de ficha de inscrição">
+        <header><b>Ficha do candidato</b><small>EXEMPLO</small></header>
+        <div class="row"><dt>Candidato</dt><dd>Maria Aparecida Lopes</dd></div>
+        <div class="row"><dt>Categoria</dt><dd>Sertanejo · sexta-feira</dd></div>
+        <div class="row"><dt>Música</dt><dd>Evidências</dd></div>
+        <div class="row"><dt>Tom</dt><dd><span class="tom">C</span> modula para <span class="tom">Eb</span></dd></div>
+        <div class="row"><dt>Versão</dt><dd>youtube.com/watch?v=… (ao vivo, 2012)</dd></div>
+        <div class="row"><dt>Observação</dt><dd>Começar direto no refrão</dd></div>
+        <p class="note">É isso que a banda recebe de cada inscrito.</p>
+      </dl>
+    </div>
+  </section>
+
+  <section id="como">
+    <div class="wrap">
+      <p class="eyebrow">Como funciona</p>
+      <h2>Do link ao palco</h2>
+      <ol class="steps">
+        <li><b>O festival é cadastrado</b><p>A organização passa dias e categorias, e a banda monta o festival no sistema.</p></li>
+        <li><b>O candidato recebe o link</b><p>O formulário chega pela organização. É simples, passo a passo, com letras grandes.</p></li>
+        <li><b>Envia a versão e o tom</b><p>Link do YouTube, Spotify ou Deezer, ou o áudio pronto, mais o tom e as observações.</p></li>
+        <li><b>Ensaio e palco</b><p>A banda organiza a ordem do ensaio e chega preparada para cada música.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="shows">
+    <div class="wrap">
+      <p class="eyebrow">Shows</p>
+      <h2>A mesma banda, na sua festa</h2>
+      <p style="color:var(--muted);max-width:60ch;margin-top:18px">Quem toca um festival inteiro, com dezenas de músicas e estilos diferentes, segura qualquer pista. Repertório montado com você, para o tipo de evento e o público.</p>
+      <ul class="events">
+        <li>Casamentos</li>
+        <li>Formaturas</li>
+        <li>Eventos corporativos</li>
+        <li>Aniversários e festas</li>
+        <li>Festas de cidade e rodeios</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="eyebrow">Para quem</p>
+      <h2>Contratantes e candidatos</h2>
+      <div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+        <article class="card">
+          <h3>Vai fazer um evento?</h3>
+          <ul>
+            <li>Show completo para casamento, formatura ou empresa</li>
+            <li>Repertório combinado antes</li>
+            <li>Som e estrutura com equipe técnica própria</li>
+          </ul>
+          <a class="btn primary" href="#contato" style="justify-self:start">Pedir orçamento</a>
+        </article>
+        <article class="card">
+          <h3>Vai organizar um festival?</h3>
+          <ul>
+            <li>Banda completa de apoio para todas as categorias</li>
+            <li>Inscrições das músicas centralizadas num link só</li>
+            <li>Equipe técnica que chega antes para montar a estrutura</li>
+          </ul>
+          <a class="btn primary" href="#contato" style="justify-self:start">Pedir orçamento</a>
+        </article>
+        <article class="card">
+          <h3>Vai cantar no festival?</h3>
+          <ul>
+            <li>Mande a versão exata que você ensaiou</li>
+            <li>Informe o tom, e se a música modula</li>
+            <li>Use o link que a organização do seu festival mandou</li>
+          </ul>
+          <a class="btn ghost" href="https://claude.ai/artifact/NPg58YBPjRwNrcME2pKa8D" style="justify-self:start">Enviar minha música</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="eyebrow">No palco</p>
+      <h2>Fotos dos festivais</h2>
+      <div class="photos" aria-label="Espaços para fotos">
+        <div class="ph big">Foto da banda no palco</div>
+        <div class="ph">Foto de festival</div>
+        <div class="ph">Foto de ensaio</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato">
+    <div class="wrap split">
+      <div class="stack">
+        <p class="eyebrow">Contato</p>
+        <h2>Leve a APK para o seu evento</h2>
+        <p>Festival, casamento, formatura ou evento da empresa: fale com a gente para datas, orçamento e estrutura.</p>
+      </div>
+      <div class="contact">
+        <div class="line"><span>WhatsApp</span><span>(00) 00000-0000</span></div>
+        <div class="line"><span>Instagram</span><span>@bandaapk</span></div>
+        <div class="line"><span>E-mail</span><span>contato@bandaapk.com.br</span></div>
+        <div class="line"><span>Região</span><span>Rio Grande do Sul, Santa Catarina e Paraná</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap"><span>Banda APK · festivais de canto, shows e eventos</span><a href="https://claude.ai/artifact/NPg58YBPjRwNrcME2pKa8D">Área da banda</a></div>
+</footer>
+</body>
+</html>

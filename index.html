@@ -36,18 +36,20 @@ p{margin:0}
 
 /* topo */
 .top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:20px}
-.logo{font-family:var(--display);font-size:28px;letter-spacing:.04em;text-decoration:none}
-.logo span{color:var(--brass)}
+.logo{display:block;text-decoration:none}
+.logo img{display:block;height:52px;width:auto}
 .top nav{display:flex;gap:18px;flex-wrap:wrap;font-size:15px}
 .top nav a{text-decoration:none;color:var(--muted)}
 .top nav a:hover{color:var(--paper)}
+@media (max-width:600px){.top nav a:not([href="#contato"]){display:none}.top nav a[href="#contato"]{color:var(--brass);font-weight:700}}
 
 /* hero */
 .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
 .hero::before{content:"";position:absolute;inset:-20% 10% auto auto;width:70vw;max-width:780px;aspect-ratio:1;background:radial-gradient(closest-side,rgba(226,176,74,.30),rgba(226,176,74,0));pointer-events:none;animation:spot 9s ease-in-out infinite alternate}
 @keyframes spot{to{transform:translateX(-12vw)}}
 @media (prefers-reduced-motion:reduce){.hero::before{animation:none}}
-.hero .wrap{position:relative;padding-block:56px 72px;display:grid;gap:28px}
+.hero .wrap{position:relative;padding-block:40px 8px;display:grid;gap:28px}
+.hero .band{position:relative;display:block;width:min(1100px,100%);height:auto;margin:0 auto;padding-inline:16px;filter:drop-shadow(0 -10px 40px rgba(226,176,74,.18))}
 .hero h1{font-size:clamp(64px,15vw,184px)}
 .hero h1 em{font-style:normal;color:var(--brass);display:block}
 .hero .lead{max-width:56ch;font-size:clamp(18px,2.2vw,21px);color:var(--muted)}
@@ -100,16 +102,20 @@ section{padding-block:72px;border-bottom:1px solid var(--line)}
 .card ul{margin:0;padding-left:20px;color:var(--muted);display:grid;gap:6px}
 
 /* fotos */
-.photos{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px;margin-top:36px}
-.ph{aspect-ratio:4/5;max-width:100%;border:1px dashed var(--line);border-radius:6px;display:grid;place-items:center;text-align:center;padding:12px;color:var(--muted);font-family:var(--mono);font-size:12px;background:repeating-linear-gradient(135deg,var(--curtain-2) 0 12px,var(--curtain) 12px 24px)}
-.ph.big{aspect-ratio:auto;grid-row:span 1}
-@media (max-width:600px){.photos{grid-template-columns:1fr 1fr}.ph.big{grid-column:1/-1;aspect-ratio:16/10}}
+.photos{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:220px;gap:12px;margin-top:36px}
+.ph{position:relative;margin:0;overflow:hidden;border-radius:6px;background:var(--curtain-2)}
+.ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.ph:hover img{transform:scale(1.04)}
+.ph figcaption{position:absolute;left:10px;bottom:10px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:rgba(26,6,9,.75);padding:4px 8px;border-radius:4px}
+.ph.big{grid-column:span 2;grid-row:span 2}
+@media (max-width:700px){.photos{grid-template-columns:1fr 1fr;grid-auto-rows:160px}}
+@media (prefers-reduced-motion:reduce){.ph img{transition:none}}
 
 /* contato */
 .contact{display:grid;gap:12px}
 .contact .line{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:14px;border-bottom:1px solid var(--line)}
 .contact .line span:first-child{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);padding-top:4px}
-.contact .line span:last-child{font-weight:500;user-select:all}
+.contact .line>:last-child{font-weight:500}
 
 footer{padding-block:32px;color:var(--muted);font-size:14px}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
@@ -118,7 +124,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 <body>
 
 <header class="wrap top">
-  <a class="logo" href="#">BANDA <span>APK</span></a>
+  <a class="logo" href="#"><img src="img/logo.webp" alt="Banda APK" width="900" height="379"></a>
   <nav aria-label="Principal">
     <a href="#banda">A banda</a>
     <a href="#shows">Shows</a>
@@ -138,6 +144,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     </div>
     <div class="states" aria-label="Onde tocamos"><span>RS</span><span>SC</span><span>PR</span></div>
   </div>
+  <img class="band" src="img/banda.webp" alt="Integrantes da Banda APK" width="1800" height="847">
 </div>
 
 <main>
@@ -229,11 +236,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <section>
     <div class="wrap">
       <p class="eyebrow">No palco</p>
-      <h2>Fotos dos festivais</h2>
+      <h2>Festivais, shows e estrada</h2>
       <div class="photos" aria-label="Espaços para fotos">
-        <div class="ph big">Foto da banda no palco</div>
-        <div class="ph">Foto de festival</div>
-        <div class="ph">Foto de ensaio</div>
+        <figure class="ph big"><img src="img/palco.webp" alt="Banda APK no palco com luzes" loading="lazy"><figcaption>No palco</figcaption></figure>
+        <figure class="ph"><img src="img/publico.webp" alt="Banda com o público ao fundo" loading="lazy"><figcaption>Festa de cidade</figcaption></figure>
+        <figure class="ph"><img src="img/show-bar.webp" alt="Show acústico da banda" loading="lazy"><figcaption>Show</figcaption></figure>
+        <figure class="ph"><img src="img/vocal.webp" alt="Vocalista cantando" loading="lazy"><figcaption>Voz</figcaption></figure>
+        <figure class="ph"><img src="img/clipe.webp" alt="Gravação de clipe da banda" loading="lazy"><figcaption>Clipe</figcaption></figure>
       </div>
     </div>
   </section>
@@ -247,7 +256,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       </div>
       <div class="contact">
         <div class="line"><span>WhatsApp</span><span>(00) 00000-0000</span></div>
-        <div class="line"><span>Instagram</span><span>@bandaapk</span></div>
+        <div class="line"><span>Instagram</span><a href="https://www.instagram.com/bandaapkoficial/">@bandaapkoficial</a></div>
         <div class="line"><span>E-mail</span><span>contato@bandaapk.com.br</span></div>
         <div class="line"><span>Região</span><span>Rio Grande do Sul, Santa Catarina e Paraná</span></div>
       </div>
